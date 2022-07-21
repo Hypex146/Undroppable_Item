@@ -1,0 +1,13 @@
+name: Undroppable_item
+version: 1.4.0
+author: Hypex
+main: Undroppable_item.Main
+api-version: 1.13
+commands:
+   UndroppableItem:
+      description: Reload config.
+permissions:
+   UndroppableItem.*:
+      description: Gives access to all commands.
+   UndroppableItem.reload:
+      description: Gives access to reload plugin.
