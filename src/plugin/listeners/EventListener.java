@@ -6,15 +6,20 @@ import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -114,6 +119,29 @@ public class EventListener implements Listener {
         	event.setCancelled(true);
         }
         return;
+	}
+	
+	@EventHandler
+	public void onPlayerArmorStandManipulate(PlayerArmorStandManipulateEvent event) {
+		if (event.getPlayer().getGameMode()==GameMode.CREATIVE) { return; }
+		ItemStack player_item = event.getPlayerItem();
+		//ItemStack stand_item = event.getArmorStandItem();
+		if (isFullyUndroppable(player_item)) {
+			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerInteractFrame(PlayerInteractEntityEvent event) {
+		if (event.getPlayer().getGameMode()==GameMode.CREATIVE) { return; }
+		Entity clicked = event.getRightClicked();
+		if (clicked.getType() != EntityType.ITEM_FRAME) { return; }
+		Player player = event.getPlayer();
+		PlayerInventory player_inv = player.getInventory();
+		ItemStack item_stack = player_inv.getItem(event.getHand());
+		if (isFullyUndroppable(item_stack)) {
+			event.setCancelled(true);
+		}
 	}
 	
 }

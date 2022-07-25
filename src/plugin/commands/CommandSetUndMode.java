@@ -48,6 +48,7 @@ public class CommandSetUndMode implements CommandExecutor {
 				sender.sendMessage("Неверное значение параметра! Возможны: partly и fully.");
 				return false;
 			}
+			sender.sendMessage("Неверный синтаксис! После комманды укажите один из тегов: partly или fully.");
 			return false;
 		}
 		sender.sendMessage("У вас нет прав на выполнение данной команды!");

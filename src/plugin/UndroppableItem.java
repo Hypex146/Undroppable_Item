@@ -57,6 +57,7 @@ public class UndroppableItem extends JavaPlugin {
 	
 	public void loadConfig() {
 		logger_.log(LogLevel.DEBUG, Level.INFO, "Подгружаем конфиг");
+		reloadConfig();
 		config_ = getConfig();
 		enable_ = configurator_.getBoolean(config_, "enable", true);
 		LogLevel log_level = LogLevel.toEnum(configurator_.getString(config_, 
