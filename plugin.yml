@@ -1,13 +1,27 @@
-name: Undroppable_item
-version: 1.4.0
+name: Undroppable_Item
+version: 0.0.1
 author: Hypex
-main: Undroppable_item.Main
-api-version: 1.13
+main: plugin.UndroppableItem
+api-version: 1.18
 commands:
-   UndroppableItem:
-      description: Reload config.
+   undroppable_item:
+      description: Plugin command (reload).
+      aliases: udi
+#      permission: undroppable_item.admin
+#      permission-message: You do not have permission <permission>
+#      usage: Syntax error! Perhaps you meant /<command> reload?
+   set_und_mode:
+      description: Sets the mode in which the subject is processed by this plugin.
+      aliases: sum
+#      permission: undroppable_item.admin
+#      permission-message: You do not have permission <permission>
+#      usage: Syntax error!
 permissions:
-   UndroppableItem.*:
+   undroppable_item.admin:
       description: Gives access to all commands.
-   UndroppableItem.reload:
-      description: Gives access to reload plugin.
+      default: false
+   undroppable_item.*:
+      description: Gives access to all commands.
+      default: false
+      children:
+         undroppable_item.admin: true
